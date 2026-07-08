@@ -1,5 +1,5 @@
 {
-    "name": "Tuya Local",
-    "homeassistant": "2026.6.0",
+    "name": "Tuya Local WR",
+    "homeassistant": "2026.7.1.1",
     "hacs": "2.0.0"
 }
