@@ -364,6 +364,7 @@ entities:
       - id: 128
         name: value
         type: integer
+        optional: true
         range:
           min: 1
           max: 7
