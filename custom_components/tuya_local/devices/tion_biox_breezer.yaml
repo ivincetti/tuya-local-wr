@@ -1,0 +1,454 @@
+name: Breezer
+# products:
+#   - id: UNKNOWN
+#     manufacturer: TION
+#     model: BioX
+#     model_id: 000004wuvd
+entities:
+  - entity: fan
+    translation_key: ventilation
+    dps:
+      - id: 101
+        name: switch
+        type: boolean
+      - id: 102
+        name: speed
+        type: integer
+        mapping:
+          - dps_val: 1
+            value: 14
+          - dps_val: 2
+            value: 29
+          - dps_val: 3
+            value: 43
+          - dps_val: 4
+            value: 57
+          - dps_val: 5
+            value: 71
+          - dps_val: 6
+            value: 86
+          - dps_val: 7
+            value: 100
+      - id: 107
+        name: preset_mode
+        type: boolean
+        mapping:
+          - dps_val: false
+            value: fresh
+          - dps_val: true
+            value: circulate
+
+  - entity: climate
+    translation_key: heater
+    icon: "mdi:heat-wave"
+    dps:
+      - id: 105
+        name: hvac_mode
+        type: boolean
+        mapping:
+          - dps_val: false
+            value: "off"
+          - dps_val: true
+            value: heat
+      - id: 114
+        name: temperature
+        type: integer
+        unit: C
+        range:
+          min: 0
+          max: 30
+      - id: 126
+        name: current_temperature
+        type: integer
+        unit: C
+      - id: 117
+        name: hvac_action
+        type: boolean
+        mapping:
+          - dps_val: false
+            value: idle
+          - dps_val: true
+            value: heating
+
+  - entity: light
+    translation_key: indicator
+    category: config
+    dps:
+      - id: 104
+        name: brightness
+        type: string
+        mapping:
+          - dps_val: "0"
+            value: 0
+          - dps_val: "50"
+            value: 128
+          - dps_val: "100"
+            value: 255
+
+  - entity: switch
+    translation_key: sound
+    category: config
+    dps:
+      - id: 103
+        name: switch
+        type: boolean
+
+  - entity: switch
+    translation_key: child_lock
+    category: config
+    dps:
+      - id: 111
+        name: switch
+        type: boolean
+
+  - entity: switch
+    name: Auto mode
+    icon: "mdi:auto-mode"
+    category: config
+    dps:
+      - id: 131
+        name: switch
+        type: boolean
+
+  - entity: switch
+    translation_key: night_mode
+    category: config
+    dps:
+      - id: 132
+        name: switch
+        type: boolean
+
+  - entity: switch
+    name: Automatic CO2 calibration
+    icon: "mdi:molecule-co2"
+    category: config
+    dps:
+      - id: 136
+        name: switch
+        type: boolean
+
+  - entity: button
+    translation_key: filter_reset
+    category: config
+    dps:
+      - id: 110
+        name: button
+        type: boolean
+
+  - entity: button
+    translation_key: factory_reset
+    category: config
+    hidden: true
+    dps:
+      - id: 109
+        name: button
+        type: boolean
+
+  - entity: button
+    name: CO2 calibration
+    icon: "mdi:molecule-co2"
+    category: config
+    dps:
+      - id: 135
+        name: button
+        type: boolean
+        optional: true
+
+  - entity: sensor
+    class: carbon_dioxide
+    dps:
+      - id: 106
+        name: sensor
+        type: integer
+        unit: ppm
+        class: measurement
+      - id: 122
+        name: available
+        type: string
+        mapping:
+          - dps_val: avail
+            value: true
+          - value: false
+
+  - entity: sensor
+    class: pm25
+    hidden: unavailable
+    dps:
+      - id: 116
+        name: sensor
+        type: integer
+        unit: ugm3
+        class: measurement
+      - id: 123
+        name: available
+        type: string
+        mapping:
+          - dps_val: avail
+            value: true
+          - value: false
+
+  - entity: sensor
+    name: Room temperature
+    class: temperature
+    dps:
+      - id: 126
+        name: sensor
+        type: integer
+        unit: C
+        class: measurement
+      - id: 124
+        name: available
+        type: string
+        mapping:
+          - dps_val: avail
+            value: true
+          - value: false
+
+  - entity: sensor
+    name: Indoor temperature
+    class: temperature
+    category: diagnostic
+    dps:
+      - id: 108
+        name: sensor
+        type: integer
+        unit: C
+        class: measurement
+
+  - entity: sensor
+    name: Outdoor temperature
+    class: temperature
+    dps:
+      - id: 112
+        name: sensor
+        type: integer
+        unit: C
+        class: measurement
+
+  - entity: sensor
+    class: humidity
+    dps:
+      - id: 119
+        name: sensor
+        type: integer
+        unit: "%"
+        class: measurement
+      - id: 124
+        name: available
+        type: string
+        mapping:
+          - dps_val: avail
+            value: true
+          - value: false
+
+  - entity: sensor
+    translation_key: filter_life
+    category: diagnostic
+    dps:
+      - id: 115
+        name: sensor
+        type: integer
+        unit: "%"
+
+  - entity: sensor
+    name: Runtime
+    class: duration
+    category: diagnostic
+    dps:
+      - id: 113
+        name: sensor
+        type: integer
+        unit: s
+        class: total_increasing
+
+  - entity: sensor
+    name: Heater output
+    category: diagnostic
+    dps:
+      - id: 120
+        name: sensor
+        type: integer
+        unit: "%"
+        class: measurement
+
+  - entity: sensor
+    name: Heater power
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 118
+        name: sensor
+        type: string
+        mapping:
+          - dps_val: "0"
+            value: Not present
+          - dps_val: 1_KB
+            value: 1 kW
+          - dps_val: 1_4_KB
+            value: 1.4 kW
+
+  - entity: binary_sensor
+    class: problem
+    category: diagnostic
+    dps:
+      - id: 127
+        name: sensor
+        type: string
+        mapping:
+          - dps_val: "None"
+            value: false
+          - value: true
+      - id: 127
+        name: fault_code
+        type: string
+
+  - entity: sensor
+    name: CO2 sensor state
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 122
+        name: sensor
+        type: string
+        mapping:
+          - dps_val: absent
+            value: Absent
+          - dps_val: wait
+            value: Waiting
+          - dps_val: wait_data
+            value: Waiting for data
+          - dps_val: avail
+            value: Available
+
+  - entity: sensor
+    name: PM2.5 sensor state
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 123
+        name: sensor
+        type: string
+        mapping:
+          - dps_val: absent
+            value: Absent
+          - dps_val: wait
+            value: Waiting
+          - dps_val: wait_data
+            value: Waiting for data
+          - dps_val: avail
+            value: Available
+
+  - entity: sensor
+    name: Temperature and humidity sensor state
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 124
+        name: sensor
+        type: string
+        mapping:
+          - dps_val: absent
+            value: Absent
+          - dps_val: wait
+            value: Waiting
+          - dps_val: wait_data
+            value: Waiting for data
+          - dps_val: avail
+            value: Available
+
+  - entity: number
+    name: Maximum auto speed
+    icon: "mdi:fan-auto"
+    category: config
+    dps:
+      - id: 128
+        name: value
+        type: integer
+        range:
+          min: 1
+          max: 7
+
+  - entity: number
+    name: Minimum auto speed
+    icon: "mdi:fan-auto"
+    category: config
+    dps:
+      - id: 129
+        name: value
+        type: integer
+        range:
+          min: 0
+          max: 1
+
+  - entity: number
+    name: CO2 target
+    class: carbon_dioxide
+    category: config
+    dps:
+      - id: 130
+        name: value
+        type: integer
+        unit: ppm
+        range:
+          min: 400
+          max: 1500
+        mapping:
+          - step: 50
+
+  - entity: number
+    name: Filter replacement interval
+    class: duration
+    category: config
+    dps:
+      - id: 134
+        name: value
+        type: integer
+        unit: d
+        range:
+          min: 1
+          max: 365
+
+  - entity: select
+    name: Panel color
+    icon: "mdi:palette"
+    category: config
+    dps:
+      - id: 133
+        name: option
+        type: string
+        mapping:
+          - dps_val: color0
+            value: Color 0
+          - dps_val: color1
+            value: Color 1
+          - dps_val: color2
+            value: Color 2
+          - dps_val: color3
+            value: Color 3
+          - dps_val: color4
+            value: Color 4
+
+  - entity: select
+    name: Voice speed
+    icon: "mdi:account-voice"
+    category: config
+    dps:
+      - id: 125
+        name: option
+        type: string
+        optional: true
+        mapping:
+          - dps_val: "1"
+            value: "1"
+          - dps_val: "2"
+            value: "2"
+          - dps_val: "3"
+            value: "3"
+          - dps_val: "4"
+            value: "4"
+          - dps_val: "5"
+            value: "5"
+          - dps_val: "6"
+            value: "6"
+          - dps_val: "7"
+            value: "7"
